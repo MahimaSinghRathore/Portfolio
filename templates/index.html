@@ -1,0 +1,400 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<main class="portfolio-shell" id="top">
+    <!-- Navigation -->
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a class="brand-mark" href="#top" aria-label="Mahima Singh home">
+            <span>MS</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="nav-menu" id="nav-menu">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero section-pad" aria-labelledby="hero-title">
+        <div class="mesh mesh-one"></div>
+        <div class="mesh mesh-two"></div>
+        <div class="hero-grid">
+            <div class="hero-copy" data-aos="fade-up">
+                <p class="eyebrow">Portfolio / Software Engineering / AI</p>
+                <h1 id="hero-title">
+                    Hi,<br>
+                    I'm <span>{{ about.name | default("Mahima Singh") }}</span>
+                </h1>
+                <p class="typing-line" aria-live="polite">
+                    <span id="typing-text">Software Engineer</span>
+                    <span class="typing-cursor" aria-hidden="true"></span>
+                </p>
+                <p class="hero-bio">
+                    {{ about.bio | default("B.Tech Computer Science Engineering student at Jaypee University of Information Technology, building Flask dashboards, simulators, machine learning systems, and practical web applications.", true) }}
+                </p>
+
+                <div class="hero-actions" aria-label="Primary actions">
+                    <a class="btn btn-primary" href="{{ about.resume_url | default(url_for('static', filename='images/Mahima_Singh_Resume_8.pdf'), true) }}" download>
+                        <i class="fa-solid fa-download"></i>
+                        Download Resume
+                    </a>
+                    <a class="btn btn-secondary" href="#projects">
+                        <i class="fa-solid fa-layer-group"></i>
+                        View Projects
+                    </a>
+                    <a class="btn btn-ghost" href="#contact">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Hire Me
+                    </a>
+                </div>
+
+                <div class="social-row" aria-label="Social links">
+                    <a href="{{ about.github | default('https://github.com/MahimaSinghRathore', true) }}" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="{{ about.linkedin | default('#') }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:{{ about.email | default('mahima30031997@gmail.com', true) }}" aria-label="Email">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual" data-aos="zoom-in" data-aos-delay="120">
+                <div class="orbit-ring"></div>
+                <div class="floating-chip chip-one" data-depth="0.22">
+                    <i class="fa-solid fa-code"></i>
+                    Flask
+                </div>
+                <div class="floating-chip chip-two" data-depth="0.34">
+                    <i class="fa-solid fa-brain"></i>
+                    AI
+                </div>
+                <div class="floating-chip chip-three" data-depth="0.18">
+                    <i class="fa-solid fa-bolt"></i>
+                    ML
+                </div>
+                <div class="profile-frame" data-depth="0.08">
+                    <img
+                        src="{{ url_for('static', filename='images/' + about.profile_image) }}"
+                        alt="{{ about.name }} portrait"
+                        loading="eager"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section-pad about-section" id="about" aria-labelledby="about-title">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">About</p>
+            <h2 id="about-title">Engineering with product taste.</h2>
+        </div>
+
+        <div class="about-grid">
+            <article class="glass-panel about-story" data-aos="fade-right">
+                <h3>Builder mindset, refined execution.</h3>
+                <p>
+                    {{ about.bio | default("I am a Computer Science Engineering student focused on solving practical problems through web development, simulation, data visualization, and applied machine learning.", true) }}
+                </p>
+                <p>
+                    My work includes hostel water monitoring, CPU scheduling simulation, medical leave workflows, and deep learning-based medical image classification.
+                </p>
+            </article>
+
+            <div class="stats-grid" data-aos="fade-left">
+                <article class="stat-card">
+                    <span class="stat-value counter" data-target="{{ about.cgpa | default('8.78', true) }}">0</span>
+                    <span class="stat-label">CGPA</span>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-value counter" data-target="{{ projects | length if projects else 4 }}">0</span>
+                    <span class="stat-label">Projects</span>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-value counter" data-target="{{ skills | length if skills else 16 }}">0</span>
+                    <span class="stat-label">Technologies</span>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-value counter" data-target="{{ about.certifications | default('3', true) }}">0</span>
+                    <span class="stat-label">Certifications</span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section-pad" id="skills" aria-labelledby="skills-title">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Skills</p>
+            <h2 id="skills-title">A practical toolkit for shipping.</h2>
+        </div>
+
+        <div class="skills-grid">
+            {% for skill in skills %}
+            <article class="skill-card tilt-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 45 }}">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>{{ skill.skill_name }}</h3>
+            </article>
+            {% else %}
+            {% for skill in ["C++", "Python", "C", "JavaScript", "HTML", "CSS", "Flask", "PHP", "Bootstrap", "MySQL", "Chart.js", "Matplotlib", "TensorFlow", "Keras", "OpenCV", "NumPy"] %}
+            <article class="skill-card tilt-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 45 }}">
+                <div class="skill-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>{{ skill }}</h3>
+            </article>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section-pad projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Projects</p>
+            <h2 id="projects-title">Selected work with real product presence.</h2>
+        </div>
+
+        <div class="projects-grid">
+            {% for project in projects %}
+            <article class="project-card tilt-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 60 }}">
+                <div class="project-content">
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description }}</p>
+                    <div class="tech-stack" aria-label="Technologies used">
+                        {% for tech in (project.technologies | default('Flask, JavaScript, MySQL', true)).split(',') %}
+                        <span>{{ tech.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-actions">
+                        <a href="{{ project.github_link | default('#') }}" target="_blank" rel="noopener">
+                            <i class="fa-brands fa-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% else %}
+            <article class="project-card tilt-card" data-aos="fade-up">
+                <div class="project-content">
+                    <h3>Hostel Smart Water Management System</h3>
+                    <p>Built a web-based dashboard to monitor and simulate hostel water usage in real time, including leakage detection, greywater reuse, peak-hour usage alerts, analytics, and event logging.</p>
+                    <div class="tech-stack">
+                        <span>Flask</span>
+                        <span>MySQL</span>
+                        <span>Chart.js</span>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/MahimaSinghRathore" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </article>
+            <article class="project-card tilt-card" data-aos="fade-up">
+                <div class="project-content">
+                    <h3>CPU Scheduling Simulator</h3>
+                    <p>Designed an interactive simulator for FCFS, SJF, Round Robin, and Priority scheduling with dynamic process input, Gantt chart visualization, and calculated turnaround, waiting, response, and completion times.</p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>OS</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/MahimaSinghRathore" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </article>
+            <article class="project-card tilt-card" data-aos="fade-up">
+                <div class="project-content">
+                    <h3>Medical Leave Management System</h3>
+                    <p>Created a leave management portal with role-based logins for students, doctors, teachers, HODs, and deans, supporting document uploads, real-time tracking, and sequential approval workflows.</p>
+                    <div class="tech-stack">
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/MahimaSinghRathore" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </article>
+            <article class="project-card tilt-card" data-aos="fade-up">
+                <div class="project-content">
+                    <h3>Down Syndrome Detection Using Deep Learning</h3>
+                    <p>Developed an image classification system using CNN, VGG16, and ResNet50 on 2,999 facial images with preprocessing, augmentation, transfer learning, and model evaluation. Achieved 85.19% accuracy with VGG16.</p>
+                    <div class="tech-stack">
+                        <span>Python</span>
+                        <span>TensorFlow</span>
+                        <span>Keras</span>
+                        <span>OpenCV</span>
+                        <span>NumPy</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/MahimaSinghRathore" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section-pad" id="education" aria-labelledby="education-title">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Education</p>
+            <h2 id="education-title">Academic foundation with builder energy.</h2>
+        </div>
+
+        <div class="timeline">
+            <article class="timeline-item" data-aos="fade-up">
+                <span class="timeline-dot"></span>
+                <div class="timeline-card">
+                    <p class="timeline-date">2023 - Present | CGPA: 8.78</p>
+                    <h3>B.Tech - Computer Science Engineering</h3>
+                    <p>Jaypee University of Information Technology, Himachal Pradesh.</p>
+                </div>
+            </article>
+            <article class="timeline-item" data-aos="fade-up">
+                <span class="timeline-dot"></span>
+                <div class="timeline-card">
+                    <p class="timeline-date">Core Strengths</p>
+                    <h3>CS Foundations</h3>
+                    <p>DSA, operating systems, DBMS, OOP, web development, simulation, and applied machine learning.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Achievements -->
+    <section class="section-pad achievements-section" id="achievements" aria-labelledby="achievements-title">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Achievements</p>
+            <h2 id="achievements-title">Signals of craft and consistency.</h2>
+        </div>
+
+        <div class="achievement-list">
+            <article class="achievement-card" data-aos="fade-up">
+                <i class="fa-solid fa-trophy"></i>
+                <div>
+                    <h3>Winner - Innovate with Nvidia: From Zero to Hero</h3>
+                    <p>Developed an integrated IoT solution for food insecurity with Aahar App, IoT-enabled Aahar Suraksha Kendra community fridges, and GPS-enabled eco-friendly pickup vehicles.</p>
+                </div>
+            </article>
+            <article class="achievement-card" data-aos="fade-up" data-aos-delay="80">
+                <i class="fa-solid fa-medal"></i>
+                <div>
+                    <h3>SIAM JUIT Member</h3>
+                    <p>Organized and participated in events including Auctionomics, Innovate with Nvidia, and Lunix.</p>
+                </div>
+            </article>
+            <article class="achievement-card" data-aos="fade-up" data-aos-delay="160">
+                <i class="fa-solid fa-star"></i>
+                <div>
+                    <h3>Applied Deep Learning Project</h3>
+                    <p>Built and evaluated CNN, VGG16, and ResNet50 models for facial image classification, achieving the best result with VGG16.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="section-pad" id="certifications" aria-labelledby="certifications-title">
+        <div class="section-heading" data-aos="fade-up">
+            <p class="eyebrow">Certifications</p>
+            <h2 id="certifications-title">Continuous learning, visible proof.</h2>
+        </div>
+
+        <div class="cert-grid">
+            <article class="cert-card" data-aos="zoom-in">
+                <i class="fa-solid fa-certificate"></i>
+                <h3>Functional Data Structures and Algorithms</h3>
+                <p>Infosys Springboard</p>
+            </article>
+            <article class="cert-card" data-aos="zoom-in" data-aos-delay="80">
+                <i class="fa-brands fa-python"></i>
+                <h3>Introduction to Python</h3>
+                <p>Infosys Springboard</p>
+            </article>
+            <article class="cert-card" data-aos="zoom-in" data-aos-delay="160">
+                <i class="fa-solid fa-code"></i>
+                <h3>Programming Using C++</h3>
+                <p>Infosys Springboard</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section-pad contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="contact-card glass-panel" data-aos="fade-up">
+            <div class="contact-copy">
+                <p class="eyebrow">Contact</p>
+                <h2 id="contact-title">Let's build something quietly excellent.</h2>
+                <p>For roles, internships, collaborations, or freelance work, send a note and I will get back to you.</p>
+                <a href="mailto:{{ about.email | default('mahima30031997@gmail.com', true) }}">
+                    <i class="fa-solid fa-envelope"></i>
+                    {{ about.email | default("mahima30031997@gmail.com", true) }}
+                </a>
+            </div>
+
+            <form class="contact-form" action="/contact" method="POST">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>Designed and built by {{ about.name | default("Mahima Singh") }}.</p>
+        <div class="footer-links">
+            <a href="{{ about.github | default('https://github.com/MahimaSinghRathore', true) }}" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="{{ about.linkedin | default('#') }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:{{ about.email | default('mahima30031997@gmail.com', true) }}" aria-label="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        </div>
+        <a class="back-to-top" href="#top" aria-label="Back to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </a>
+    </footer>
+</main>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

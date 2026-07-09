@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ about.name if about else "Portfolio" }}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+
+    <footer>
+
+        <!-- <h3>{{ about.name if about else "Portfolio" }}</h3>
+
+        <p>
+
+            Designed & Developed using Flask, MySQL and Python.
+
+        </p> -->
+
+        <!-- <div class="social-icons">
+
+            <a href="{{ about.github if about else '#' }}">
+
+                <i class="fab fa-github"></i>
+
+            </a>
+
+            <a href="{{ about.linkedin if about else '#' }}">
+
+                <i class="fab fa-linkedin"></i>
+
+            </a>
+
+            <a href="mailto:{{ about.email if about else '' }}">
+
+                <i class="fas fa-envelope"></i>
+
+            </a>
+
+        </div> -->
+
+    </footer>
+
+
+
+    <!-- JS -->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+
+        AOS.init();
+
+    </script>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
